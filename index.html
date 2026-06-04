@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UrbanRise Realty | Find Your Dream Property in Pune</title>
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="UrbanRise Realty is a trusted real estate company in Pune specializing in residential apartments, luxury homes, commercial properties, and investment opportunities.">
+  <meta name="keywords" content="real estate pune, apartments in baner, villas in wakad, office space hinjawadi, properties in kharadi, urbanrise realty">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Favicon Mock -->
+  <link rel="icon" type="image/png" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90' fill='%23D4AF37'>🏠</text></svg>">
+</head>
+<body>
+
+  <!-- TOAST CONTAINER FOR NOTIFICATIONS -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- NAVIGATION HEADER -->
+  <header id="main-header">
+    <div class="container">
+      <a href="#/home" class="logo">
+        <span>Urban</span>Rise
+      </a>
+      
+      <nav class="nav-links" id="nav-links">
+        <a href="#/home" class="nav-link active" data-route="home">Home</a>
+        <a href="#/properties" class="nav-link" data-route="properties">Properties</a>
+        <a href="#/locations" class="nav-link" data-route="locations">Locations</a>
+        <a href="#/about" class="nav-link" data-route="about">About Us</a>
+        <a href="#/contact" class="nav-link" data-route="contact">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Auth state indicator / Action button -->
+        <div id="header-auth-section">
+          <button class="btn btn-outline btn-sm" id="btn-login-trigger" style="padding: 0.5rem 1.5rem; font-size: 0.85rem;">
+            <i data-lucide="user" style="width: 16px; height: 16px;"></i> Consultation Access
+          </button>
+        </div>
+        <!-- Mobile menu toggle button -->
+        <button class="mobile-nav-toggle" id="btn-mobile-toggle">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN APP SPA VIEW WRAPPER -->
+  <main id="app-view" class="animate-fade">
+    <!-- Dynamic page content will be injected here via app.js -->
+    <div class="flex-center" style="min-height: 80vh; flex-direction: column; gap: 1.5rem;">
+      <div style="width: 50px; height: 50px; border: 3px solid rgba(212,175,55,0.2); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite;"></div>
+      <p style="color: var(--text-muted); font-family: var(--font-sans); letter-spacing: 1px; text-transform: uppercase; font-size: 0.85rem;">Finding Your Perfect Space...</p>
+    </div>
+  </main>
+
+  <!-- DYNAMIC MODAL DRAWER: PROPERTY COMPARISON BOARD -->
+  <div id="compare-drawer" class="compare-drawer">
+    <div class="container">
+      <div class="compare-drawer-header">
+        <h4 class="compare-title">
+          <i data-lucide="git-compare" style="color: var(--accent);"></i> Compare Properties <span id="compare-count">(0/3)</span>
+        </h4>
+        <div style="display: flex; gap: 1rem; align-items: center;">
+          <button class="btn btn-primary btn-sm" id="btn-trigger-comparison" style="padding: 0.5rem 1.5rem; font-size: 0.85rem;" disabled>
+            Compare Now
+          </button>
+          <button class="btn btn-secondary btn-sm" id="btn-clear-compare" style="padding: 0.5rem 1.2rem; font-size: 0.85rem;">
+            Clear All
+          </button>
+          <button class="btn-close-modal" id="btn-close-compare-drawer" style="background: none; font-size: 1.2rem;">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+      </div>
+      <div class="compare-items-row">
+        <div class="compare-card-slots" id="compare-slots-container">
+          <!-- Slots will be injected dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARISON DETAIL DIALOG OVERLAY (FULL SCREEN MATRIX) -->
+  <div id="compare-modal" class="compare-modal">
+    <div class="container">
+      <div class="compare-modal-header">
+        <h2 style="font-family: var(--font-serif); font-size: 2.2rem;">Property Comparison <span>Matrix</span></h2>
+        <button class="compare-modal-close" id="btn-close-compare-matrix">
+          <i data-lucide="arrow-left"></i> Back to Exploration
+        </button>
+      </div>
+      <div id="compare-matrix-wrapper">
+        <!-- Comparison table injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- AUTHENTICATION DIALOG (LOGIN/REGISTER MODAL) -->
+  <div id="auth-modal" class="modal-overlay">
+    <div class="modal-card glassmorphism-gold">
+      <div class="modal-header">
+        <h3 class="modal-title" id="auth-modal-title">Sign In</h3>
+        <button class="btn-close-modal" id="btn-close-auth-modal">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      
+      <!-- Login Form View -->
+      <form id="auth-form" class="sidebar-form">
+        <div class="form-group">
+          <label for="auth-email">Email Address</label>
+          <input type="email" id="auth-email" placeholder="e.g. buyer@urbanrise.in" required>
+        </div>
+        <div class="form-group">
+          <label for="auth-password">Password</label>
+          <input type="password" id="auth-password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top: 1rem; width: 100%;">
+          Authenticate Session
+        </button>
+      </form>
+      
+      <!-- Quick logins helper for testing / presentation demo -->
+      <div class="quick-autofill">
+        <span class="quick-autofill-label">Autofill Demo Roles</span>
+        <div class="autofill-buttons">
+          <button class="btn btn-secondary btn-sm" id="btn-demo-user" style="font-size: 0.75rem; padding: 0.5rem;">
+            User Demo
+          </button>
+          <button class="btn btn-secondary btn-sm" id="btn-demo-admin" style="font-size: 0.75rem; padding: 0.5rem; border-color: var(--accent);">
+            Admin Demo
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-switch-text" id="modal-switch-text">
+        Don't have an account? <a href="#" id="link-switch-to-register">Create Account</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#/home" class="logo"><span>Urban</span>Rise</a>
+          <p>UrbanRise Realty is Pune's premium real estate consultancy, offering verified residential apartments, luxury villas, commercial offices, and residential plots across Pune's top developments.</p>
+          <div class="social-links">
+            <a href="#" class="btn-icon"><i data-lucide="instagram" style="width: 18px; height: 18px;"></i></a>
+            <a href="#" class="btn-icon"><i data-lucide="facebook" style="width: 18px; height: 18px;"></i></a>
+            <a href="#" class="btn-icon"><i data-lucide="twitter" style="width: 18px; height: 18px;"></i></a>
+            <a href="#" class="btn-icon"><i data-lucide="linkedin" style="width: 18px; height: 18px;"></i></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Pages</h4>
+          <div class="footer-links">
+            <a href="#/home">Home</a>
+            <a href="#/properties">Properties</a>
+            <a href="#/locations">Locations</a>
+            <a href="#/about">About Us</a>
+            <a href="#/contact">Contact</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Popular Hubs</h4>
+          <div class="footer-links">
+            <a href="#/properties?location=Baner">Baner</a>
+            <a href="#/properties?location=Wakad">Wakad</a>
+            <a href="#/properties?location=Hinjawadi">Hinjawadi</a>
+            <a href="#/properties?location=Kharadi">Kharadi</a>
+            <a href="#/properties?location=Kothrud">Kothrud</a>
+            <a href="#/properties?location=Viman Nagar">Viman Nagar</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-title">Consultation Desk</h4>
+          <p class="newsletter-desc">Subscribe to receive off-market plots, pre-launch apartment rates, and investment sheets.</p>
+          <form class="newsletter-form" id="newsletter-form">
+            <input type="email" placeholder="Your corporate email..." required>
+            <button type="submit">Join</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="copyright">&copy; 2026 UrbanRise Realty. All rights reserved. Registered under MahaRERA.</p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Inline keyframe for spin (loading state) -->
+  <style>
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+
+  <!-- APPLICATION ENGINE -->
+  <script src="app.js"></script>
+</body>
+</html>
