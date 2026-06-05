@@ -189,6 +189,16 @@ function initApp() {
       }
     });
   }
+  // Close mobile nav on click
+  if (navLinks) {
+    navLinks.addEventListener("click", (e) => {
+      if (e.target.classList.contains("nav-link")) {
+        if (window.innerWidth <= 768) {
+          navLinks.style.display = "none";
+        }
+      }
+    });
+  }
 
   // Set up click events on auth triggers and modals
   document.getElementById("btn-login-trigger").addEventListener("click", () => openAuthModal());
@@ -392,7 +402,7 @@ function updateHeaderAuthSection() {
   } else {
     container.innerHTML = `
       <button class="btn btn-outline btn-sm" id="btn-login-trigger" style="padding: 0.5rem 1.5rem; font-size: 0.85rem;">
-        <i data-lucide="user" style="width: 16px; height: 16px;"></i> Consultation Access
+        <i data-lucide="user" style="width: 16px; height: 16px;"></i> <span class="btn-text">Consultation Access</span>
       </button>
     `;
     document.getElementById("btn-login-trigger").addEventListener("click", () => openAuthModal());
@@ -1085,7 +1095,7 @@ function renderPropertiesView(queryParams) {
           </div>
 
           <div class="filter-actions-row">
-            <div class="price-range-slider" style="width: 340px;">
+            <div class="price-range-slider" style="width: 100%; max-width: 340px;">
               <div class="price-labels">
                 <label>Budget Limit</label>
                 <span>Up to ${formatIndianPrice(propertiesViewFilterState.priceMax)}</span>

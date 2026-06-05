@@ -2885,3 +2885,163 @@ footer {
     width: 20px;
   }
 }
+
+/* --- ADDITIONAL MOBILE RESPONSIVENESS PATCHES --- */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  .properties-list-col .properties-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .detail-spec-item {
+    border-left: none !important;
+    padding-left: 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 1rem;
+  }
+  .detail-spec-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .compare-drawer-header {
+    flex-wrap: wrap !important;
+    gap: 1rem !important;
+  }
+  .compare-items-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 1rem !important;
+  }
+  .compare-card-slots {
+    overflow-x: auto !important;
+    width: 100% !important;
+    padding-bottom: 0.5rem !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .compare-slot {
+    flex-shrink: 0 !important;
+  }
+  #compare-matrix-wrapper {
+    width: 100%;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .compare-matrix-table {
+    min-width: 600px;
+  }
+}
+
+@media (max-width: 576px) {
+  .search-fields {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+  .search-fields .btn {
+    grid-column: span 1 !important;
+    width: 100% !important;
+  }
+  .price-range-slider {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  .stat-item {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding-bottom: 1rem !important;
+    padding-left: 0 !important;
+  }
+  .stat-item:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.4rem !important;
+  }
+  #btn-login-trigger .btn-text {
+    display: none !important;
+  }
+  #btn-login-trigger {
+    padding: 0.5rem !important;
+    min-width: 38px;
+  }
+  .user-badge span {
+    display: none !important;
+  }
+  .user-badge {
+    padding: 0.3rem !important;
+  }
+  .header-actions {
+    gap: 0.6rem;
+  }
+  header .container {
+    padding: 0 1rem !important;
+  }
+  .newsletter-form {
+    flex-direction: column !important;
+    background: transparent !important;
+    border: none !important;
+    gap: 0.8rem !important;
+    padding: 0 !important;
+  }
+  .newsletter-form input {
+    background: var(--surface) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-xl) !important;
+    width: 100% !important;
+  }
+  .newsletter-form button {
+    border-radius: var(--radius-xl) !important;
+    width: 100% !important;
+  }
+  .toast-container {
+    top: 1rem !important;
+    right: 1rem !important;
+    left: 1rem !important;
+    width: auto !important;
+  }
+  .toast {
+    padding: 0.8rem 1.2rem !important;
+    font-size: 0.85rem !important;
+    width: 100% !important;
+  }
+  .modal-card {
+    padding: 1.8rem !important;
+  }
+  .dashboard-main-content {
+    padding: 1.5rem !important;
+  }
+  .dash-block {
+    padding: 1.25rem !important;
+  }
+  .hero-title {
+    font-size: 2rem !important;
+  }
+  .section-title {
+    font-size: 1.8rem !important;
+  }
+  .details-title {
+    font-size: 1.6rem !important;
+  }
+  .about-intro-text h2 {
+    font-size: 1.8rem !important;
+  }
+  .dashboard-title {
+    font-size: 1.8rem !important;
+  }
+  .cta-title {
+    font-size: 1.6rem !important;
+  }
+  .container {
+    padding: 0 1.25rem !important;
+  }
+}
